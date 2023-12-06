@@ -30,4 +30,15 @@ const listarProdutos=function(){
         return false
 }
 
+const listarProdutosCategoria=function(){
+    let arrayProdutos=[]
+    let contador=0
+    let contador2=0
+    let status=true
+    let filtro='Bebidas'
+    while(contador<dadosPizzaria.produtos.length){
+        if(filtro.toUpperCase()==dadosPizzaria.produtos[contador].categorias[contador2].nome)
+    }
+}
+
 console.log(listarProdutos())
