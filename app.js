@@ -1,44 +1,28 @@
-const dadosPizzaria=require('./module/dados_pizzaria')
+const express=require('express')
+const bodyParser=require('body-parser')
+const cors=require('cors')
 
-const listarUsuarios=function(){
-    let arrayUsuarios=[]
-    let contador=0
-    let status=true
-    while(contador<dadosPizzaria.usuarios.length){
-        arrayUsuarios.push(dadosPizzaria.usuarios[contador].nome)
-        contador++
-        status=true
+const app=express()
+
+app.use((request,response,next)=>{
+    response.header('Access-Control-Allow-Origin','*')
+    response.header('Access-Control-Allow-Methods','GET')
+    app.use(cors())
+    next()
+})
+
+app.get('/usuarios/nome',cors(),async function(request,response,next){
+    let controleDadosPizzaria=require('./module/funcoes.js')
+    let listaUsuarios=controleDadosPizzaria.getListaDeUsuarios()
+    if(listaUsuarios){
+        response.json(listaUsuarios)
+        response.status(200)
     }
-    if(status)
-        return arrayUsuarios
-    else
-        return false
-}
-
-const listarProdutos=function(){
-    let arrayProdutos=[]
-    let contador=0
-    let status=true
-    while(contador<dadosPizzaria.produtos.length){
-        arrayProdutos.push(dadosPizzaria.produtos[contador].nome)
-        contador++
-        status=true
+    else{
+        response.status(404)
     }
-    if(status)
-        return arrayProdutos
-    else
-        return false
-}
+})
 
-const listarProdutosCategoria=function(){
-    let arrayProdutos=[]
-    let contador=0
-    let contador2=0
-    let status=true
-    let filtro='Bebidas'
-    while(contador<dadosPizzaria.produtos.length){
-        if(filtro.toUpperCase()==dadosPizzaria.produtos[contador].categorias[contador2].nome)
-    }
-}
-
-console.log(listarProdutos())
+app.listen('8080',function(){
+    console.log('API no ar!!!')
+})
