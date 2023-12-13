@@ -15,7 +15,7 @@ const getListaDeUsuarios=function(){
         return false
 }
 
-const listarProdutos=function(){
+const getListaDeProdutos=function(){
     let arrayProdutos=[]
     let contador=0
     let status=true
@@ -30,16 +30,22 @@ const listarProdutos=function(){
         return false
 }
 
-// const listarProdutosCategoria=function(){
-//     let arrayProdutos=[]
-//     let contador=0
-//     let contador2=0
-//     let status=true
-//     let filtro='Bebidas'
-//     while(contador<dadosPizzaria.produtos.length){
-//         if(filtro.toUpperCase()==dadosPizzaria.produtos[contador].categorias[contador2].nome)
-//     }
-// }
+const getListaDeProdutosBemAvaliados=function(){
+    let arrayProdutos=[]
+    let contador=0
+    let status=true
+    while(contador<dadosPizzaria.produtos.length){
+        if(dadosPizzaria.produtos[contador].avaliacao>=4)
+            arrayProdutos.push(dadosPizzaria.produtos[contador].nome)
+        contador++
+        status=true
+    }
+    if(status)
+        return arrayProdutos
+    else
+        return false
+}
 
 //console.log(listarProdutos())
-module.exports={getListaDeUsuarios}
+console.log(getListaDeProdutosBemAvaliados())
+module.exports={getListaDeUsuarios,getListaDeProdutos,getListaDeProdutosBemAvaliados}
