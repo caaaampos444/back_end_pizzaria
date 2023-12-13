@@ -47,6 +47,18 @@ app.get('/produtos/nome/avaliacao',cors(),async function(request,response,next){
     }
 })
 
+app.get('/categorias/nome',cors(),async function(request,response,next){
+    let controleDadosPizzaria=require('./module/funcoes.js')
+    let listaCategorias=controleDadosPizzaria.getCategorias()
+    if(listaCategorias){
+        response.json(listaCategorias)
+        response.status(200)
+    }
+    else{
+        response.status(404)
+    }
+})
+
 app.listen('8080',function(){
     console.log('API no ar!!!')
 })
